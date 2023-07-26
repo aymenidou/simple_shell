@@ -22,7 +22,7 @@ int _strlen(const char *s)
  * Return: char
  */
 
-char *_strcpy(char *dest,const char *src)
+char *_strcpy(char *dest, const char *src)
 {
 	int i;
 
@@ -40,7 +40,7 @@ char *_strcpy(char *dest,const char *src)
  *Return: string concatenation
  */
 
-char *_strcat(char *dest,const char *src)
+char *_strcat(char *dest, const char *src)
 {
 	int i = _strlen(dest), k;
 
