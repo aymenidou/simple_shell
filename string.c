@@ -25,24 +25,22 @@ void _printf(char *str)
 int _putchar(char c)
 {
 	static int i;
-	/*static char buf[BUFFER];*/
 
 	write(1, &c, i);
-	/*if (c == FLUSH || i >= BUFFER)
-	{
-		write(1, buf, i);
-		i = 0;
-	}
-	if (c != FLUSH)
-		buf[i++] = c;*/
 	return (1);
 }
-
+/**
+ * _string_splitter - split string
+ * @buffer: input buffer
+ * @del: delimiter
+ * Return: splitted string head
+*/
 char **_string_splitter(char *buffer, char *del)
 {
 	char **tokens;
 	char *token;
 	int i = 0;
+
 	tokens = malloc(sizeof(char *) * 1024);
 	token = strtok(buffer, del);
 	while (token)
