@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- *_printf - printa string
+ *_printf - print a string
  *@str: input string
  */
 void _printf(char *str)
@@ -25,8 +25,15 @@ void _printf(char *str)
 int _putchar(char c)
 {
 	static int i;
+	static char buf[WRITE_BUF_SIZE];
 
-	write(1, &c, i);
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	{
+		write(1, buf, i);
+		i = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
 	return (1);
 }
 /**
@@ -60,27 +67,19 @@ char **_string_splitter(char *buffer, char *del)
  * Return: string comparison
  */
 
-int _strcmp(const char *s1, const char *s2)
+int _strcmp(char *s1, char *s2)
 {
-	for (; *s1 != '\0' && *s2 != '\0'; s1++, s2++)
+	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
-		{
 			return (*s1 - *s2);
-		}
-		else if (*s1 == '\0' || *s2 == '\0')
-		{
-			break;
-		}
+		s1++;
+		s2++;
 	}
 	if (*s1 == *s2)
-	{
 		return (0);
-	}
 	else
-	{
-		return (*s1 - *s2);
-	}
+		return (*s1 < *s2 ? -1 : 1);
 }
 
 /**
